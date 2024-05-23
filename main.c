@@ -19,6 +19,8 @@ menu:
 		printf("и это одна из первых моих программ(по крайней мере работающих)\n");
 		printf("Пожалуйста поддержи меня, выбрав пункт меню 3\n");
 		scanf("%d",&menu);
+			if(menu!=3)
+			goto menu;
 		if(menu==3) {
 donation:
 			;
@@ -35,7 +37,7 @@ donation:
 				return 0;
 			}
 			if(menu!=1)
-				goto menu;
+			goto menu;
 		}
 	}
 	if(menuchoise==1) {
@@ -140,9 +142,9 @@ workfactorial:
 		printf("Целая часть равна %d\n",WholePart);
 		printf("Остаток равен %d/%d=%g\n",FinalFractionNum,FinalFractionDen,Fraction);
 		if(Fractionint==0)
-		printf("Итоговый результат %d\n",WholePart);
+			printf("Итоговый результат %d\n",WholePart);
 		if(Fractionint!=0)
-		printf("Итоговый результат %d %d\\%d\n",WholePart,Fractionint,FinalFractionDen);
+			printf("Итоговый результат %d %d\\%d\n",WholePart,Fractionint,FinalFractionDen);
 	}
 	return 0;
 }
