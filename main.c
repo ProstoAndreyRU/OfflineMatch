@@ -5,6 +5,53 @@
 //Автор ProstoAndreyRU v0.01
 
 int main(int argc, char *argv[]) {
+	int menuchoise,menu=0;
+menu:
+	printf("Привет! Ты находишься в меню, пожалуйста выбери что хочешь\n");
+	printf("1.Выбор программ\n");
+	printf("2.Об авторе\n");
+	printf("3.Поддержка\n");
+	scanf("%d",&menuchoise);
+	if(menuchoise==3)
+		goto donation;
+	if(menuchoise==2) {
+		printf("Привет, меня зовут Андрей! Я новичок в программировании");
+		printf("и это одна из первых моих программ(по крайней мере работающих)\n");
+		printf("Пожалуйста поддержи меня, выбрав пункт меню 3\n");
+		scanf("%d",&menu);
+		if(menu==3) {
+donation:
+			;
+			printf("Спасибо что решил поддержать меня!^_^\n");
+			printf("Это можно сделать, отправив какую-то сумму на donationalerts\n");
+			printf("Вот ссылка:https://www.donationalerts.com/r/prostoandreyru\n");
+			printf("А сейчас возврат в меню!\n");
+			printf("Если хочешь выйти набери 1\n");
+			printf("Если нет то введи что-то другое\n");
+			fflush(stdin);
+			scanf("%d",&menu);
+			if(menu==1) {
+				printf("Пока");
+				return 0;
+			}
+			if(menu!=1)
+				goto menu;
+		}
+	}
+	if(menuchoise==1) {
+		printf("На данный момент доступна 1 программа\n");
+		printf("Программа: Вычисление,сложение,вычитание, умножение и деление дробей\n");
+		printf("Хотите запустить? Если да наберите 1\n");
+		printf("В противном случаем наберите другую цифру\n");
+		scanf("%d",&menu);
+		if(menu==1) {
+			goto workfactorial;
+		}
+elseif:
+		goto menu;
+	}
+workfactorial:
+	;
 	int chislo1,drob1,drob2,chislo2,drob3,drob4;
 	char action;
 	int Confradrob1,Confradrob2,test=0,big=0,WholePart,FinalFractionNum=0,FinalFractionDen=0,Fractionint;
@@ -92,6 +139,9 @@ int main(int argc, char *argv[]) {
 		printf("%d/%d=%d\n",FinalFractionNum,FinalFractionDen,WholePart);
 		printf("Целая часть равна %d\n",WholePart);
 		printf("Остаток равен %d/%d=%g\n",FinalFractionNum,FinalFractionDen,Fraction);
+		if(Fractionint==0)
+		printf("Итоговый результат %d\n",WholePart);
+		if(Fractionint!=0)
 		printf("Итоговый результат %d %d\\%d\n",WholePart,Fractionint,FinalFractionDen);
 	}
 	return 0;
