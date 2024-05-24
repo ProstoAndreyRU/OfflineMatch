@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define SIZE 20
 
 //Эта программа для вычисления сложения, вычитания, умножения и деления дробей!
 //Автор ProstoAndreyRU v0.01
 
 int main(int argc, char *argv[]) {
 	int menuchoise,menu=0;
+	int a,b,c,nod,nok,nodsum,menunodnok,nods;
 menu:
 	printf("Привет! Ты находишься в меню, пожалуйста выбери что хочешь\n");
 	printf("1.Выбор программ\n");
@@ -19,7 +21,7 @@ menu:
 		printf("и это одна из первых моих программ(по крайней мере работающих)\n");
 		printf("Пожалуйста поддержи меня, выбрав пункт меню 3\n");
 		scanf("%d",&menu);
-			if(menu!=3)
+		if(menu!=3)
 			goto menu;
 		if(menu==3) {
 donation:
@@ -37,17 +39,21 @@ donation:
 				return 0;
 			}
 			if(menu!=1)
-			goto menu;
+				goto menu;
 		}
 	}
 	if(menuchoise==1) {
-		printf("На данный момент доступна 1 программа\n");
+		printf("На данный момент доступна 2 программы\n");
 		printf("Программа: Вычисление,сложение,вычитание, умножение и деление дробей\n");
-		printf("Хотите запустить? Если да наберите 1\n");
+		printf("Программы:Вычисление Нод и Нок суммы\n");
+		printf("Что Хотите запустить? Если первую то выберите 1, если 2 то наберите 2\n");
 		printf("В противном случаем наберите другую цифру\n");
 		scanf("%d",&menu);
 		if(menu==1) {
 			goto workfactorial;
+		}
+		if(menu==2) {
+			goto nodnok;
 		}
 elseif:
 		goto menu;
@@ -147,4 +153,127 @@ workfactorial:
 			printf("Итоговый результат %d %d\\%d\n",WholePart,Fractionint,FinalFractionDen);
 	}
 	return 0;
+nodnok:
+	;
+	void bubbleSort(int* num, int size) {
+		// Для всех элементов
+		for (int i = 0; i < size - 1; i++) {
+			for (int j = (size - 1); j > i; j--) { // для всех элементов после i-ого
+				if (num[j - 1] < num[j]) { // если текущий элемент больше предыдущего
+					int temp = num[j - 1]; // меняем их местами
+					num[j - 1] = num[j];
+					num[j] = temp;
+				}
+			}
+		}
+	}
+	int bestsimple(int x,int y,int z) {
+//		printf("Number factors: \n");
+		int divisor=2;
+		int divisor2=2;
+		int divisor3=2;
+		int arraya[SIZE]= {0};
+		int arrayb[SIZE]= {0};
+		int arrayc[SIZE]= {0};
+		int i=0;
+		int i2=0;
+		int i3=0;
+		int tempx=x;
+		int tempy=y;
+		int tempz=z;
+		while(x!=1) {
+			while(x%divisor==0) {
+//				printf("%d ",divisor);
+				arraya[i]=divisor;
+				i++;
+				x/=divisor;
+			}
+			divisor+=1;
+		}
+		while(y!=1) {
+			while(y%divisor2==0) {
+//				printf("%d ",divisor2);
+				arrayb[i2]=divisor2;
+				i2++;
+				y/=divisor2;
+			}
+			divisor2+=1;
+		}
+		while(z!=1) {
+			while(z%divisor3==0) {
+//				printf("%d ",divisor3);
+				arrayc[i3]=divisor3;
+				i3++;
+				z/=divisor3;
+			}
+			divisor3+=1;
+		}
+//		printf("\n");
+		printf("Для числа %d разложение на простые множители дало\n",tempx);
+		for(i=0; i<SIZE; ++i) {
+			printf("%d ",arraya[i]);
+			if(arraya[i]==0)
+				break;
+		}
+		printf("\nДля числа %d разложение на простые множители дало\n",tempy);
+		for(i=0; i<SIZE; ++i) {
+			printf("%d ",arrayb[i]);
+			if(arrayb[i]==0)
+				break;
+		}
+		printf("\nДля числа %d разложение на простые множители дало\n",tempz);
+		for(i=0; i<SIZE; ++i) {
+			printf("%d ",arrayc[i]);
+			if(arrayc[i]==0)
+				break;
+		}
+		printf("\nСортируем! От большего к меньшему! Получается\n");
+		bubbleSort(arraya, SIZE);
+		bubbleSort(arrayb, SIZE);
+		bubbleSort(arrayc, SIZE);
+		for(i=0; i<SIZE; ++i) {
+			printf("%d ",arraya[i]);
+			if(arraya[i]==0)
+				break;
+		}
+			printf("\n");
+		for(i=0; i<SIZE; ++i) {
+			printf("%d ",arrayb[i]);
+			if(arrayb[i]==0)
+				break;
+		}
+			printf("\n");
+
+		for(i=0; i<SIZE; ++i) {
+			printf("%d ",arrayc[i]);
+			if(arrayc[i]==0)
+				break;
+		}
+		printf("\n");
+	}
+	printf("Сколько чисел?\n");
+	printf("Выберите 2, 3 или 4 числа\n");
+	scanf("%d",&menunodnok);
+	switch(menunodnok) {
+		case 2 :
+			printf("Введите два числа,вычислится НОД И НОК числа\n");
+			scanf("%d%d",&a,&b);
+			nod=gcd(a,b);
+			nok=a*b/nod;
+			printf("Нод равняется %d Нок равняется %d\n",nod,nok);
+			break;
+		case 3:
+			printf("Введите три числа,вычислится НОД И НОК чисел\n");
+			scanf("%d%d%d",&a,&b,&c);
+			bestsimple(a,b,c);
+			break;
+
+		case 4:
+			printf("В разработке\n");
+			break;
+		default:
+			printf("Ошибка ввода,проверьте данные\n");
+			return 0;
+			break;
+	}
 }
