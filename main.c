@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #define SIZE 20
 
-//Эта программа для вычисления сложения, вычитания, умножения и деления дробей!
-//Автор ProstoAndreyRU v0.01
+//Эта программа для различных математических вычислений в Offline режиме!
+//Автор ProstoAndreyRU v0.02.
+//Вторая функция не доделана.
 
 int main(int argc, char *argv[]) {
 	int menuchoise,menu=0;
@@ -155,11 +156,39 @@ workfactorial:
 	return 0;
 nodnok:
 	;
-	void bubbleSort(int* num, int size) {
+	void removeDuplicates(int arr[], int size) {
+		int temp[size];
+		int j = 0;
+		for (int i = 0; i < size - 1; i++) {
+			if (arr[i] != arr[i+1]) {
+				temp[j++] = arr[i];
+			}
+		}
+		temp[j++] = arr[size - 1];
+		for (int i = 0; i < j; i++) {
+			arr[i] = temp[i];
+		}
+		for (int i = 0; i < j; i++) {
+//			printf("%d ", arr[i]);
+		}
+	}
+	void bubbleSortHigh(int* num, int size) {
 		// Для всех элементов
 		for (int i = 0; i < size - 1; i++) {
 			for (int j = (size - 1); j > i; j--) { // для всех элементов после i-ого
-				if (num[j - 1] < num[j]) { // если текущий элемент больше предыдущего
+				if (num[j - 1] < num[j]) { // если текущий элемент меньше предыдущего
+					int temp = num[j - 1]; // меняем их местами
+					num[j - 1] = num[j];
+					num[j] = temp;
+				}
+			}
+		}
+	}
+	void bubbleSortLow(int* num, int size) {
+		// Для всех элементов
+		for (int i = 0; i < size - 1; i++) {
+			for (int j = (size - 1); j > i; j--) { // для всех элементов после i-ого
+				if (num[j - 1] > num[j]) { // если текущий элемент меньше предыдущего
 					int temp = num[j - 1]; // меняем их местами
 					num[j - 1] = num[j];
 					num[j] = temp;
@@ -228,21 +257,21 @@ nodnok:
 				break;
 		}
 		printf("\nСортируем! От большего к меньшему! Получается\n");
-		bubbleSort(arraya, SIZE);
-		bubbleSort(arrayb, SIZE);
-		bubbleSort(arrayc, SIZE);
+		bubbleSortHigh(arraya, SIZE);
+		bubbleSortHigh(arrayb, SIZE);
+		bubbleSortHigh(arrayc, SIZE);
 		for(i=0; i<SIZE; ++i) {
 			printf("%d ",arraya[i]);
 			if(arraya[i]==0)
 				break;
 		}
-			printf("\n");
+		printf("\n");
 		for(i=0; i<SIZE; ++i) {
 			printf("%d ",arrayb[i]);
 			if(arrayb[i]==0)
 				break;
 		}
-			printf("\n");
+		printf("\n");
 
 		for(i=0; i<SIZE; ++i) {
 			printf("%d ",arrayc[i]);
@@ -250,30 +279,55 @@ nodnok:
 				break;
 		}
 		printf("\n");
-	}
-	printf("Сколько чисел?\n");
-	printf("Выберите 2, 3 или 4 числа\n");
-	scanf("%d",&menunodnok);
-	switch(menunodnok) {
-		case 2 :
-			printf("Введите два числа,вычислится НОД И НОК числа\n");
-			scanf("%d%d",&a,&b);
-			nod=gcd(a,b);
-			nok=a*b/nod;
-			printf("Нод равняется %d Нок равняется %d\n",nod,nok);
-			break;
-		case 3:
-			printf("Введите три числа,вычислится НОД И НОК чисел\n");
-			scanf("%d%d%d",&a,&b,&c);
-			bestsimple(a,b,c);
-			break;
+		int size = sizeof(arraya) / sizeof(arraya[0]);
+		printf("Удаляем дубликаты!\n");
+		removeDuplicates(arraya, size);
+		removeDuplicates(arrayb, size);
+		removeDuplicates(arrayc, size);
+		printf("Что получилось?\n");
+		for(i=0; i<size; ++i) {
+			printf("%d ",arraya[i]);
+			if(arraya[i]==0)
+				break;
+		}
+		printf("\n");
 
-		case 4:
-			printf("В разработке\n");
-			break;
-		default:
-			printf("Ошибка ввода,проверьте данные\n");
-			return 0;
-			break;
+		for(i=0; i<size; ++i) {
+			printf("%d ",arrayb[i]);
+			if(arrayb[i]==0)
+				break;
+		}
+		printf("\n");
+
+		for(i=0; i<size; ++i) {
+			printf("%d ",arrayc[i]);
+			if(arrayc[i]==0)
+				break;
+		}
 	}
-}
+		printf("Сколько чисел?\n");
+		printf("Выберите 2, 3 или 4 числа\n");
+		scanf("%d",&menunodnok);
+		switch(menunodnok) {
+			case 2 :
+				printf("Введите два числа,вычислится НОД И НОК числа\n");
+				scanf("%d%d",&a,&b);
+				nod=gcd(a,b);
+				nok=a*b/nod;
+				printf("Нод равняется %d Нок равняется %d\n",nod,nok);
+				break;
+			case 3:
+				printf("Введите три числа,вычислится НОД И НОК чисел\n");
+				scanf("%d%d%d",&a,&b,&c);
+				bestsimple(a,b,c);
+				break;
+
+			case 4:
+				printf("В разработке\n");
+				break;
+			default:
+				printf("Ошибка ввода,проверьте данные\n");
+				return 0;
+				break;
+		}
+	}
