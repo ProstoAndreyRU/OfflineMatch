@@ -1,4 +1,4 @@
-#include <stdio.h>
+##include <stdio.h>
 #include <stdlib.h>
 #define SIZE 20
 
@@ -216,10 +216,14 @@ nodnok:
 		int sizeb;
 		int sizec;
 		int itemp=0;
-		int tempvar=0;
+		int tempvar,tempvar2=0;
 		int tempsize=1;
-		int var1,varsize1,var2,varsize2=0;
+		int var1=0,varsize1=0,var2=0,varsize2=0;
+		int varnew=0,varnewsize=0,varnew2=0,varnewsize2=0;
+		int unique1=0,uniquesize1=0,uniquesize2=0,unique2;
 		int count=0;
+		int count2=0;
+		int tempchar=0;
 		while(x!=1) {
 			while(x%divisor==0) {
 //				printf("%d ",divisor);
@@ -270,46 +274,96 @@ nodnok:
 		printf("Для числа %d\n",tempx);
 		for(i=0; i<SIZE; i=i+1) {
 			if(arraya[i]==arraya[i+1]) {
-				if(arraya[i]==0&&arraya[i+1]==0) {
+				if(arraya[i]==0||arraya[i+1]==0) {
 					break;
 				}
 				tempvar=arraya[i];
 				tempsize=tempsize+1;
 				if(count==1) {
-					if(var1!=tempvar) {
+					if(tempchar==0)
+					{
+					if(var1!=tempvar)
+					{
 						var2=tempvar;
-						varsize2=tempsize;
-						count=count+1;
-						printf("\n %d в количестве %d\n",var2,varsize2);
+						varsize2=1;
+						printf("При втором подходе найдено %d и повторялось %d\n",var2,varsize2);
+						tempchar=1;
+					}
+				}
+					if(tempchar==1)
+					{
+					if(var2==tempvar&&varsize1!=varsize2)
+					{
+					varsize2=varsize2+1;
+					printf("При третьем подходе %d и повторялось %d\n",var2,varsize2);
+					}
+				}
+					if(var1==tempvar&&varsize1!=tempsize) {
+						varsize1=tempsize;
+						printf("При втором проходе %d в количестве %d\n",var1,varsize1);
 					}
 				}
 				if(count==0) {
 					var1=tempvar;
 					varsize1=tempsize;
 					count=count+1;
-					printf("\n %d в количестве %d\n",var1,varsize1);
+					printf("При первом проходе %d в количестве %d\n",var1,varsize1);
 				}
 			}
-				if(arraya[i]!=arraya[i+1]) {
-					if(tempsize==2) {
-						tempsize=tempsize-1;
-					}
-					tempvar=arraya[i];
-					if(count==1) {
-						if(var1!=tempvar) {
-							var2=tempvar;
-							varsize2=tempsize;
-							count=count+1;
-							printf("\n %d в количестве %d\n",var2,varsize2);
-						}
-					}
-					if(count==0) {
-						var1=tempvar;
-						varsize1=tempsize;
-						count=count+1;
-						printf("\n %d в количестве %d\n",var1,varsize1);
-					}
+			if(arraya[i]!=arraya[i+1]) {
+				if(arraya[i]==0||arraya[i+1]==0) {
+					break;
 				}
+				tempvar=arraya[i+1];
+				tempvar2=arraya[i];
+				varnew=tempvar;
+				varnew2=tempvar2;
+				if(varnew==var1) {
+					printf("Значения равны!\n");
+					printf("Прибавляем счётчик\n");
+					tempsize=tempsize+1;
+					printf("Теперь значение %d повторялось %d\n",var1,tempsize);
+				}
+				if(varnew2==var1) {
+					printf("Значения равны!\n");
+					printf("Ну и хорошо =)\n");
+				}
+				if(varnew==unique1) {
+					printf("Значения равны!\n");
+					printf("Прибавляем счётчик\n");
+					uniquesize1=uniquesize1+1;
+					printf("Теперь счётчик %d\n",uniquesize1);
+				}
+				if(varnew2==unique2) {
+					printf("Значения равны!\n");
+					printf("Прибавляем счётчик\n");
+					uniquesize1=uniquesize2+1;
+					printf("Теперь счётчик %d для числа %d\n",uniquesize2,unique2);
+				} if(varnew!=var1&&varnew2!=var1&&varnew!=unique1&&varnew2!=unique2) {
+					printf("Два числа не совпали %d и %d\n",varnew,varnew2);
+					printf("Значения уникальные! Сохраняем их\n");
+					unique1=varnew;
+					unique2=varnew2;
+					uniquesize1=uniquesize1+1;
+					uniquesize2=uniquesize2+1;
+					printf("Значение %d повторялось %d раз\n",unique1,uniquesize1);
+					printf("И второе значение %d повторялось %d раз\n",unique2,uniquesize2);
+				}
+			}
+			if(unique1>0&&unique2>0)
+			{
+				printf("Итог число %d а простые множители %d повторялось %d\n",tempx,unique1,uniquesize1);
+				printf("А также число %d а простые множители %d повторялось %d\n",tempx,unique2,uniquesize2);
+			}
+/*			if(var1>0)
+			{
+			printf("Итог число %d а простые множители %d повторялось %d\n",tempx,var1,tempsize);
+		}
+			if(var3>0)
+			{
+			printf("А также число %d а простые множители %d повторялось %d\n",tempx,varsize3);
+			}
+			*/
 		}
 	}
 	printf("Выберите 2, 3 или 4 числа\n");
