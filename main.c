@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #define SIZE 20
 
-//Эта программа для различных математических вычислений в Offline режиме!
-//Автор ProstoAndreyRU v0.02.
-//Вторая функция не доделана.
+//Эта программа для выполнения разных математических расчётов!
+//Автор ProstoAndreyRU v0.02
 
 int main(int argc, char *argv[]) {
 	int menuchoise,menu=0;
@@ -156,9 +155,10 @@ workfactorial:
 	return 0;
 nodnok:
 	;
-	void removeDuplicates(int arr[], int size) {
+	int removeDuplicates(int arr[], int size) {
 		int temp[size];
 		int j = 0;
+		int s=0;
 		for (int i = 0; i < size - 1; i++) {
 			if (arr[i] != arr[i+1]) {
 				temp[j++] = arr[i];
@@ -170,7 +170,9 @@ nodnok:
 		}
 		for (int i = 0; i < j; i++) {
 //			printf("%d ", arr[i]);
+			s++;
 		}
+		return s;
 	}
 	void bubbleSortHigh(int* num, int size) {
 		// Для всех элементов
@@ -210,6 +212,14 @@ nodnok:
 		int tempx=x;
 		int tempy=y;
 		int tempz=z;
+		int sizea;
+		int sizeb;
+		int sizec;
+		int itemp=0;
+		int tempvar=0;
+		int tempsize=1;
+		int var1,varsize1,var2,varsize2=0;
+		int count=0;
 		while(x!=1) {
 			while(x%divisor==0) {
 //				printf("%d ",divisor);
@@ -256,78 +266,74 @@ nodnok:
 			if(arrayc[i]==0)
 				break;
 		}
-		printf("\nСортируем! От большего к меньшему! Получается\n");
-		bubbleSortHigh(arraya, SIZE);
-		bubbleSortHigh(arrayb, SIZE);
-		bubbleSortHigh(arrayc, SIZE);
-		for(i=0; i<SIZE; ++i) {
-			printf("%d ",arraya[i]);
-			if(arraya[i]==0)
-				break;
-		}
-		printf("\n");
-		for(i=0; i<SIZE; ++i) {
-			printf("%d ",arrayb[i]);
-			if(arrayb[i]==0)
-				break;
-		}
-		printf("\n");
-
-		for(i=0; i<SIZE; ++i) {
-			printf("%d ",arrayc[i]);
-			if(arrayc[i]==0)
-				break;
-		}
-		printf("\n");
-		int size = sizeof(arraya) / sizeof(arraya[0]);
-		printf("Удаляем дубликаты!\n");
-		removeDuplicates(arraya, size);
-		removeDuplicates(arrayb, size);
-		removeDuplicates(arrayc, size);
-		printf("Что получилось?\n");
-		for(i=0; i<size; ++i) {
-			printf("%d ",arraya[i]);
-			if(arraya[i]==0)
-				break;
-		}
-		printf("\n");
-
-		for(i=0; i<size; ++i) {
-			printf("%d ",arrayb[i]);
-			if(arrayb[i]==0)
-				break;
-		}
-		printf("\n");
-
-		for(i=0; i<size; ++i) {
-			printf("%d ",arrayc[i]);
-			if(arrayc[i]==0)
-				break;
+		printf("\nСраниваем!Получается\n");
+		printf("Для числа %d\n",tempx);
+		for(i=0; i<SIZE; i=i+1) {
+			if(arraya[i]==arraya[i+1]) {
+				if(arraya[i]==0&&arraya[i+1]==0) {
+					break;
+				}
+				tempvar=arraya[i];
+				tempsize=tempsize+1;
+				if(count==1) {
+					if(var1!=tempvar) {
+						var2=tempvar;
+						varsize2=tempsize;
+						count=count+1;
+						printf("\n %d в количестве %d\n",var2,varsize2);
+					}
+				}
+				if(count==0) {
+					var1=tempvar;
+					varsize1=tempsize;
+					count=count+1;
+					printf("\n %d в количестве %d\n",var1,varsize1);
+				}
+			}
+				if(arraya[i]!=arraya[i+1]) {
+					if(tempsize==2) {
+						tempsize=tempsize-1;
+					}
+					tempvar=arraya[i];
+					if(count==1) {
+						if(var1!=tempvar) {
+							var2=tempvar;
+							varsize2=tempsize;
+							count=count+1;
+							printf("\n %d в количестве %d\n",var2,varsize2);
+						}
+					}
+					if(count==0) {
+						var1=tempvar;
+						varsize1=tempsize;
+						count=count+1;
+						printf("\n %d в количестве %d\n",var1,varsize1);
+					}
+				}
 		}
 	}
-		printf("Сколько чисел?\n");
-		printf("Выберите 2, 3 или 4 числа\n");
-		scanf("%d",&menunodnok);
-		switch(menunodnok) {
-			case 2 :
-				printf("Введите два числа,вычислится НОД И НОК числа\n");
-				scanf("%d%d",&a,&b);
-				nod=gcd(a,b);
-				nok=a*b/nod;
-				printf("Нод равняется %d Нок равняется %d\n",nod,nok);
-				break;
-			case 3:
-				printf("Введите три числа,вычислится НОД И НОК чисел\n");
-				scanf("%d%d%d",&a,&b,&c);
-				bestsimple(a,b,c);
-				break;
+	printf("Выберите 2, 3 или 4 числа\n");
+	scanf("%d",&menunodnok);
+	switch(menunodnok) {
+		case 2 :
+			printf("Введите два числа,вычислится НОД И НОК числа\n");
+			scanf("%d%d",&a,&b);
+			nod=gcd(a,b);
+			nok=a*b/nod;
+			printf("Нод равняется %d Нок равняется %d\n",nod,nok);
+			break;
+		case 3:
+			printf("Введите три числа,вычислится НОД И НОК чисел\n");
+			scanf("%d%d%d",&a,&b,&c);
+			bestsimple(a,b,c);
+			break;
 
-			case 4:
-				printf("В разработке\n");
-				break;
-			default:
-				printf("Ошибка ввода,проверьте данные\n");
-				return 0;
-				break;
-		}
+		case 4:
+			printf("В разработке\n");
+			break;
+		default:
+			printf("Ошибка ввода,проверьте данные\n");
+			return 0;
+			break;
 	}
+}
